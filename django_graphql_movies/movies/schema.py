@@ -19,4 +19,11 @@ class Query(ObjectType):
     actors = graphene.Field(ActorType)
     movies = graphene.Field(MovieType)
 
+    def resolve_actor(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return Actor.objects.get(pk=id)
+        
+        return None
     
