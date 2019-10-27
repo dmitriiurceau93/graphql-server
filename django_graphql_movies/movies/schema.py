@@ -4,16 +4,19 @@ from django_graphql_movies.movies.models import Actor, Movie
 
 # Create a Graphql type for the actor model
 class ActorType(DjangoObjectType):
+
     class Meta:
         model = Actor
 
 # Create a Graphql type for the movie model
 class MovieType(DjangoObjectType):
+
     class Meta:
         model = Movie
 
 # Create a Query type
 class Query(ObjectType):
+
     actor = graphene.Field(ActorType, id=graphene.Int())
     movie = graphene.Field(MovieType, id=graphene.Int())
     actors = graphene.Field(ActorType)
@@ -46,13 +49,32 @@ class Query(ObjectType):
 
 # Create Input Object Types
 class ActorInput(graphene.InputObjectType):
+
     id = graphene.ID()
     name = graphene.String()
 
 
 class MovieInput(graphene.InputObjectType):
+
     id = graphene.ID()
     title = graphene.String()
     actors = graphene.List(ActorInput)
     year = graphene.Int()
 
+
+# Create mutations for actors
+class CreateActor(graphene.Mutation):
+
+    class Arguments:
+        input = ActorInput(required=True)
+    
+    ok = graphene.Boolean()
+    actor = graphene.Field(ActorType)
+
+    @staticmethod
+    def mutate(root, info, input=None):
+        ok = True
+        actor_instance = Actor(name=input.name)
+        actor_instance.save()
+        return CreateActor(ok=ok, actor=actor_instance)
+    
