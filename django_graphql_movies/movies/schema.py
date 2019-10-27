@@ -38,4 +38,6 @@ class Query(ObjectType):
     def resolve_actors(self, info, **kwargs):
         return Actor.object.all()
 
+    def resolve_movies(self, info, **kwargs):
+        return Movie.object.all()
     
