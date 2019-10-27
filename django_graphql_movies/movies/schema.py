@@ -1,0 +1,9 @@
+import graphene
+from graphene_django.types import DjangoObjectType, ObjectType
+from django_graphql_movies.movies.models import Actor, Movie
+
+# Create a Graphql type for the actor model
+class ActorType(DjangoObjectType):
+    class Meta:
+        model = Actor
+
