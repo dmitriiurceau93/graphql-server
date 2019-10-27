@@ -34,3 +34,8 @@ class Query(ObjectType):
             return Movie.objects.get(pk=id)
         
         return None
+
+    def resolve_actors(self, info, **kwargs):
+        return Actor.object.all()
+
+    
