@@ -41,3 +41,11 @@ class Query(ObjectType):
     def resolve_movies(self, info, **kwargs):
         return Movie.object.all()
     
+
+# Mutations
+
+# Create Input Object Types
+class ActorInput(graphene.InputObjectType):
+    id = graphene.ID()
+    name = graphene.String()
+
