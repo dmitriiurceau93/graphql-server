@@ -26,4 +26,11 @@ class Query(ObjectType):
             return Actor.objects.get(pk=id)
         
         return None
-    
+
+    def resolve_movie(self, info, **kwargs):
+        id = kwargs.get('id')
+
+        if id is not None:
+            return Movie.objects.get(pk=id)
+        
+        return None
