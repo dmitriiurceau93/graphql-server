@@ -7,3 +7,9 @@ class ActorType(DjangoObjectType):
     class Meta:
         model = Actor
 
+
+# Create a Graphql type for the movie model
+class MovieType(DjangoObjectType):
+    class Meta:
+        model = Movie
+
